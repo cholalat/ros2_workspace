@@ -1,0 +1,13 @@
+# Ignorar archivos generados por ROS2
+/build/
+/install/
+/log/
+
+# Ignorar archivos de editor
+.vscode/
+.idea/
+
+# Ignorar archivos generados
+*.pyc
+*~
+*.swp
