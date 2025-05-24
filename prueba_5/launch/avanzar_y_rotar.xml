@@ -1,0 +1,8 @@
+<launch>
+    <include file="$(find-pkg-share prueba_5)/launch/run_all.xml"/>
+
+    <node pkg="prueba_5" exec="dead_reckoning" name="dead_reckoning"/>
+    <node pkg="prueba_5" exec="pose_loader" name="pose_loader" launch-prefix="bash -c 'sleep 5.0; $0 $@'"//>
+    
+</launch>
+
