@@ -1,0 +1,5 @@
+<launch>
+    <node pkg="mini_tarea_2" exec="controlador" name="controlador"/>
+    <node pkg="mini_tarea_2" exec="virtual_robot" name="virtual_robot"/>
+</launch>
+
