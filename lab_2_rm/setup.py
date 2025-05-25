@@ -20,6 +20,7 @@ setup(
     tests_require=['pytest'],
     entry_points={
         'console_scripts': [
+            'seguir_pasillo = lab_2_rm.seguir_pasillo:main',
         ],
     },
 )
