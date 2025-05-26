@@ -1,0 +1,10 @@
+<launch>
+  <!-- Incluye el launch run_all.xml del paquete very_simple_robot_simulator -->
+  <include file="/home/paulo/zuniversidad/5to_semestre/robotica_movil/ros2_ws/src/very_simple_robot_simulator/launch/run_all.xml" />
+
+  <!-- Nodo seguir_pasillo -->
+  <node pkg="lab_2_rm" exec="seguir_pasillo" name="seguir_pasillo" output="screen" />
+
+  <!-- Nodo controlador_PID -->
+  <node pkg="lab_2_rm" exec="controlador_PID" name="controlador_PID" output="screen" />
+</launch>

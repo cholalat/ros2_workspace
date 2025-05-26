@@ -10,6 +10,7 @@ setup(
         ('share/ament_index/resource_index/packages',
             ['resource/' + package_name]),
         ('share/' + package_name, ['package.xml']),
+        ('share/lab_2_rm/launch', ['launch/navegacion_pasillo.xml']),
     ],
     install_requires=['setuptools'],
     zip_safe=True,
