@@ -21,6 +21,8 @@ setup(
     entry_points={
         'console_scripts': [
             'seguir_pasillo = lab_2_rm.seguir_pasillo:main',
+            'controlador_PID = lab_2_rm.controlador_PID:main',
+            "pose_loader = lab_2_rm.pose_loader:main",
         ],
     },
 )

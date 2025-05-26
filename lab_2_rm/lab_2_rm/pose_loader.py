@@ -22,7 +22,7 @@ class MyNode(Node):
     def timer_callback(self, mensaje = None):
 
 
-        informacion = '/home/paulo/zuniversidad/5to_semestre/robotica_movil/ros2_ws/src/prueba_5/prueba_5/coordenadas.txt'
+        informacion = '/home/paulo/zuniversidad/5to_semestre/robotica_movil/ros2_ws/src/lab_2_rm/lab_2_rm/coordenadas.txt'
 
         with open(informacion, 'r') as file:
             lineas = file.readlines()

@@ -18,7 +18,7 @@ class ObstacleDetector(Node):
 
         self.vector_de_obstaculos = [0,0,0]
 
-        self.publisher = self.create_publisher(Vector3, "/occupancy_state", 10)
+        self.publisher = self.create_publisher(Vector3, "/distancia_paredes", 10)
 
         self.subscription = self.create_subscription(
             Image, 'camera/depth/image_raw', self.procesar_imagen, 1)
@@ -33,11 +33,13 @@ class ObstacleDetector(Node):
 
         height, width = imagen.shape
 
+        tercio_inicio = height // 3
+        tercio_fin = 2 * height // 3
 
         #Dividomos la pantalla en 3 zonas
-        area_izquierda = imagen[:, :width//3]
-        area_centro = imagen[:, width//3:2*width//3]
-        area_derecha = imagen[:, 2*width//3:]
+        area_izquierda = imagen[tercio_inicio:tercio_fin, :width//5]
+        area_centro = imagen[tercio_inicio:tercio_fin, width//5:4*width//5]
+        area_derecha = imagen[tercio_inicio:tercio_fin, 4*width//5:]
 
         #Quitamos los Nan
         area_izquierda = np.nan_to_num(area_izquierda, nan=0.0)
@@ -45,19 +47,24 @@ class ObstacleDetector(Node):
         area_derecha = np.nan_to_num(area_derecha, nan=0.0)
 
 
-        threshold = 0.5
-        
+        # Selecciona solo el tercio central vertical de cada extremo
 
-        #Vemos si hay obstaculos
+
+        dis_izquierda = np.average(area_izquierda)
+        dis_centro = np.average(area_centro)
+        dis_derecha = np.average(area_derecha)
+
+
+
+        print("promedio:", dis_izquierda,dis_centro, dis_derecha)
+
+
+        #Vemos la distancia promedio de cada zona y la enviamos al controlador
         self.vector_de_obstaculos = [
-            1 if np.nanmin(area_izquierda) <= threshold else 0,  # Izquierda
-            1 if np.nanmin(area_centro) <= threshold else 0,     # Centro
-            1 if np.nanmin(area_derecha) <= threshold else 0     # Derecha
+            dis_izquierda,
+            dis_centro,
+            dis_derecha
         ]
-
-
-        print(self.vector_de_obstaculos)
-
 
 
         #Enviamos la informacion por el la cosa por donde se envian las cosas (topico)
@@ -81,10 +88,9 @@ class ObstacleDetector(Node):
             depth_image = self.bridge.imgmsg_to_cv2(msg, desired_encoding='passthrough')
             
             # 2. Normalizar los valores para visualización
-            # - Reemplaza NaN/Inf (común en cámaras de profundidad)
             depth_image = np.nan_to_num(depth_image, nan=0.0, posinf=0.0, neginf=0.0)
             
-            # - Escalar a 8 bits (0-255) y convertir a tipo entero
+            # 3. Escalar a 8 bits (0-255)
             depth_normalized = cv2.normalize(
                 depth_image,
                 None,
@@ -93,14 +99,19 @@ class ObstacleDetector(Node):
                 norm_type=cv2.NORM_MINMAX,
                 dtype=cv2.CV_8UC1
             )
-            
-            # 3. Aplicar colormap (JET: azul=lejos, rojo=cerca)
-            depth_colormap = cv2.applyColorMap(depth_normalized, cv2.COLORMAP_JET)
-            
-            # 4. Mostrar la imagen
-            cv2.imshow("Profundidad (Colormap JET)", depth_colormap)
-            cv2.waitKey(1)  # Necesario para actualizar la ventana
-            
+
+            # 4. Ecualizar histograma para mejorar contraste
+            depth_eq = cv2.equalizeHist(depth_normalized)
+
+            # 5. Aplicar colormap perceptual (Turbo si está disponible, si no JET)
+            if hasattr(cv2, 'COLORMAP_TURBO'):
+                depth_colormap = cv2.applyColorMap(depth_eq, cv2.COLORMAP_TURBO)
+            else:
+                depth_colormap = cv2.applyColorMap(depth_eq, cv2.COLORMAP_JET)
+
+            # 6. Mostrar la imagen
+            cv2.imshow("Profundidad (Contraste Mejorado)", depth_colormap)
+            cv2.waitKey(1)
         except Exception as e:
             self.get_logger().error(f"Error al procesar profundidad: {str(e)}")
 
