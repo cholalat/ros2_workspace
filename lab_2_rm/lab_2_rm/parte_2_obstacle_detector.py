@@ -13,7 +13,7 @@ import time
 
 class ObstacleDetector(Node):
     def __init__(self):
-        super().__init__('obstacle_detector_node')
+        super().__init__('seguir_pasillo')
 
 
         self.vector_de_obstaculos = [0,0,0]

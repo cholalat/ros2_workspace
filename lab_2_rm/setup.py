@@ -21,9 +21,11 @@ setup(
     tests_require=['pytest'],
     entry_points={
         'console_scripts': [
-            'seguir_pasillo = lab_2_rm.seguir_pasillo:main',
-            'controlador_PID = lab_2_rm.controlador_PID:main',
-            "pose_loader = lab_2_rm.pose_loader:main",
+            'obstacle_detector = lab_2_rm.parte_2_obstacle_detector:main',
+            'sigue_pasillo = lab_2_rm.parte_2_sigue_pasillo:main',
+            "trayectory_loader = lab_2_rm.parte_3_trayectory_loader:main",
+            "trayectoria = lab_2_rm.parte_3_trayectoria:main",
+
         ],
     },
 )
