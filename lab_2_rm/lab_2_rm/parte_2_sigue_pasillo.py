@@ -38,16 +38,20 @@ class Moverse(Node):
         # Crear el mensaje de velocidad y publicarlo
         msg_vel = Twist()
         msg_vel.angular.z = vel_angular
+
+
+
         if dis_centro < 0.5:
             # Si el robot está demasiado cerca de un obstáculo, detenerse
             msg_vel.linear.x = 0.0
-            # Si tenemos un error angular muy pequeño cuando tenemos algo al frente, confiamos de que lo ultimo que hicimos es lo correcto y se sigue usando la vel anterior.
-            if abs(error_angular) == 0:
-                msg_vel.angular.z = self.vel_anterior_angular
 
-                #Si es que la velocidad era 0, le decimos que vaya hacia un lado y confiamos que está bien.
-                if self.vel_anterior_angular == 0.0:
-                    msg_vel.angular.z = 0.1
+
+
+
+
+            # Si tenemos un error angular muy pequeño cuando tenemos algo al frente, confiamos de que lo ultimo que hicimos es lo correcto y se sigue usando la vel anterior.
+            if abs(error_angular) <= 0.01:
+                msg_vel.angular.z = 0.1
         else:
             msg_vel.linear.x = 0.2
         self.publisher.publish(msg_vel)

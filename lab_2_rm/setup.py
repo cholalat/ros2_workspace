@@ -10,7 +10,13 @@ setup(
         ('share/ament_index/resource_index/packages',
             ['resource/' + package_name]),
         ('share/' + package_name, ['package.xml']),
+        ('share/lab_2_rm/launch', ['launch/navegacion_cuadrado_perfecto.xml']),
         ('share/lab_2_rm/launch', ['launch/navegacion_pasillo.xml']),
+        ('share/lab_2_rm/launch', ['launch/follow_the_carrot_line.xml']),
+        ('share/lab_2_rm/launch', ['launch/follow_the_carrot_sin.xml']),
+        ('share/lab_2_rm/launch', ['launch/follow_the_carrot_sqrt.xml']),
+        ('share/lab_2_rm/launch', ['launch/follow_the_carrot_paralelepipedo.xml']),
+
     ],
     install_requires=['setuptools'],
     zip_safe=True,
@@ -25,6 +31,7 @@ setup(
             'sigue_pasillo = lab_2_rm.parte_2_sigue_pasillo:main',
             "trayectory_loader = lab_2_rm.parte_3_trayectory_loader:main",
             "trayectoria = lab_2_rm.parte_3_trayectoria:main",
+            "graficador = lab_2_rm.graficador:main",
 
         ],
     },

@@ -37,9 +37,9 @@ class ObstacleDetector(Node):
         tercio_fin = 2 * height // 3
 
         #Dividomos la pantalla en 3 zonas
-        area_izquierda = imagen[tercio_inicio:tercio_fin, :width//5]
-        area_centro = imagen[tercio_inicio:tercio_fin, width//5:4*width//5]
-        area_derecha = imagen[tercio_inicio:tercio_fin, 4*width//5:]
+        area_izquierda = imagen[tercio_inicio:tercio_fin, :width//8]
+        area_centro = imagen[tercio_inicio:tercio_fin, width//8:7*width//8]
+        area_derecha = imagen[tercio_inicio:tercio_fin, 7*width//8:]
 
         #Quitamos los Nan
         area_izquierda = np.nan_to_num(area_izquierda, nan=0.0)

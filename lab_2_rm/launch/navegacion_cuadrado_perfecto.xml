@@ -14,7 +14,7 @@
 
 
   <node pkg="very_simple_robot_simulator" name="world_state_gui" exec="world_state_gui.py" output="screen" >
-    <param name="map_file" value="/home/paulo/universidad/5to_semestre/robotica_movil/archivos_random/pasillo.yaml" />
+    <param name="map_file" value="/home/paulo/universidad/5to_semestre/robotica_movil/archivos_random/cuadrado_perfecto.yaml" />
   </node>
 
 

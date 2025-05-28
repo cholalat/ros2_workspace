@@ -1,0 +1,16 @@
+<launch>
+  <!-- Incluir el simulador -->
+  <include file="$(find-pkg-share prueba_5)/launch/run_all.xml"/>
+
+  <!-- Nodo trayectoria -->
+  <node pkg="lab_2_rm" exec="trayectoria" name="trayectoria" output="screen"/>
+
+  <node pkg="lab_2_rm" exec="graficador" name="graficador" output="screen"/>
+
+
+
+  <!-- Nodo trayectory_loader con el parámetro geometry_file -->
+  <node pkg="lab_2_rm" exec="trayectory_loader" name="trayectory_loader" output="screen">
+    <param name="geometry_file" value="/home/paulo/universidad/5to_semestre/robotica_movil/ros2_ws/src/lab_2_rm/lab_2_rm/trayectorias/path_sin.txt"/>
+  </node>
+</launch>
