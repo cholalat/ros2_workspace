@@ -56,7 +56,7 @@ class ObstacleDetector(Node):
 
 
 
-        print("promedio:", dis_izquierda,dis_centro, dis_derecha)
+        # print("promedio:", dis_izquierda,dis_centro, dis_derecha)
 
 
         #Vemos la distancia promedio de cada zona y la enviamos al controlador

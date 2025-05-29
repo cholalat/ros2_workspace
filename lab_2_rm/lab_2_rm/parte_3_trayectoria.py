@@ -42,7 +42,6 @@ class SigueTrayectoria(Node):
             lista = [obj1, obj2]
             self.posiciones_trayectoria.append(lista)
 
-        print(self.posiciones_trayectoria)
 
 
 
@@ -119,10 +118,10 @@ class SigueTrayectoria(Node):
 
         self.publisher.publish(msg_vel)
 
-        print("angulo_actual real: ", math.degrees(self.posicion_actual[2]))
-        print("angulo referencia: ", math.degrees(theta_ref))
-        print("error: ", math.degrees(error))
-        print("velocidad angular: ", vel_angular)
+        # print("angulo_actual real: ", math.degrees(self.posicion_actual[2]))
+        # print("angulo referencia: ", math.degrees(theta_ref))
+        # print("error: ", math.degrees(error))
+        # print("velocidad angular: ", vel_angular)
 
 
 

@@ -56,7 +56,7 @@ class Moverse(Node):
             msg_vel.linear.x = 0.2
         self.publisher.publish(msg_vel)
         self.vel_anterior_angular = vel_angular
-        print(error_angular)
+        # print(error_angular)
 
 
 

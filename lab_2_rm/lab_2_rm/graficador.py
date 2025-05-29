@@ -56,7 +56,7 @@ class Graficador(Node):
             lista = [obj1, obj2]
             self.posiciones_trayectoria.append(lista)
 
-        print(self.posiciones_trayectoria)
+        # print(self.posiciones_trayectoria)
 
     def graficar_en_tiempo_real(self):
         plt.ion()

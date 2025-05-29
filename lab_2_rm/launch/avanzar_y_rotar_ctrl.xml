@@ -1,0 +1,6 @@
+<launch>
+    <include file="$(find-pkg-share lab_2_rm)/launch/run_all.xml"/>
+
+    <node pkg="lab_2_rm" exec="dead_reckoning_nav_original" name="dead_reckoning_nav_original"/>
+    <node pkg="lab_2_rm" exec="pose_loader" name="pose_loader"  launch-prefix="bash -c 'sleep 3.0; $0 $@'"/>
+</launch>

@@ -16,6 +16,9 @@ setup(
         ('share/lab_2_rm/launch', ['launch/follow_the_carrot_sin.xml']),
         ('share/lab_2_rm/launch', ['launch/follow_the_carrot_sqrt.xml']),
         ('share/lab_2_rm/launch', ['launch/follow_the_carrot_paralelepipedo.xml']),
+        ('share/lab_2_rm/launch', ['launch/avanzar_y_rotar_ctrl.xml']),
+        ('share/lab_2_rm/launch', ['launch/run_all.xml']),
+
 
     ],
     install_requires=['setuptools'],
@@ -32,7 +35,11 @@ setup(
             "trayectory_loader = lab_2_rm.parte_3_trayectory_loader:main",
             "trayectoria = lab_2_rm.parte_3_trayectoria:main",
             "graficador = lab_2_rm.graficador:main",
+            "dead_reckoning_nav_original = lab_2_rm.dead_reckoning_nav_original:main",
+            "pose_loader = lab_2_rm.pose_loader:main",
 
         ],
     },
 )
+
+
