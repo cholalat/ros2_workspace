@@ -1,0 +1,27 @@
+<launch>
+  <!-- Incluye el launch run_all.xml del paquete very_simple_robot_simulator -->
+
+  
+  <!-- <include file="/home/paulo/zuniversidad/5to_semestre/robotica_movil/ros2_ws/src/very_simple_robot_simulator/launch/run_all.xml" /> -->
+  
+  
+  
+  <!-- Esta linea sirve para correr en el notebook, aunque ahora que lo pienso, deberia funcionar en ambos :p -->
+  <!-- <include file="$(find-pkg-share prueba_5)/launch/run_all.xml"/> -->
+
+  <include file="$(find-pkg-share very_simple_robot_simulator)/launch/minimal_simulator_py.xml"/>
+  <include file="$(find-pkg-share very_simple_robot_simulator)/launch/openni_simulator.xml"/>
+
+
+  <node pkg="very_simple_robot_simulator" name="world_state_gui" exec="world_state_gui.py" output="screen" >
+    <!-- <param name="map_file" value="/home/paulo/universidad/5to_semestre/robotica_movil/ros2_ws/src/lab_3_rm/imagenes/mapa.yaml" /> -->
+  </node>
+
+
+
+  <!-- Nodo seguir_pasillo -->
+  <node pkg="lab_2_rm" exec="obstacle_detector" name="obstacle_detector" output="screen" />
+
+  <!-- Nodo controlador_PID -->
+  <node pkg="lab_2_rm" exec="sigue_pasillo" name="sigue_pasillo" output="screen" />
+</launch>
