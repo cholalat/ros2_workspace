@@ -1,0 +1,3 @@
+sudo apt install ros-humble-rviz2
+sudo apt install ros-humble-teleop-twist-keyboard
+sudo apt install ros-humble-tf2 ros-humble-tf2-tools
