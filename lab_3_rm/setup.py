@@ -22,6 +22,10 @@ setup(
     tests_require=['pytest'],
     entry_points={
         'console_scripts': [
+            'procesar_mapa = lab_3_rm.procesar_mapa:main',
+            'leer_lidar = lab_3_rm.leer_lidar:main',
+            "nodo_intento = lab_3_rm.nodo_de_intento:main",
+
         ],
     },
 )

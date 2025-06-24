@@ -1,0 +1,42 @@
+import numpy as np
+from scipy.spatial import KDTree
+
+def likelihood_field_model(z_t, x_t, m, params):
+    """
+    Implementación del modelo en Python
+    
+    Args:
+        z_t: dict {'ranges': [], 'angles': []} (lecturas LIDAR)
+        x_t: (x, y, theta) pose hipotética
+        m: dict {'obstacles': [], 'resolution': float, 'origin': (x,y)}
+        params: dict {'z_hit': float, 'sigma_hit': float, 'z_random': float}
+    """
+    q = 1.0
+    obstacles_kdtree = KDTree(m['obstacles'])  # Preconstruido
+    
+    for range, angle in zip(z_t['ranges'], z_t['angles']):
+        if range >= z_t['range_max']:  # Ignorar lecturas inválidas
+            continue
+            
+        # 1. Convertir a coordenadas del sensor
+        x_sensor = params['sensor_x']  # Posición del sensor en el robot
+        y_sensor = params['sensor_y']
+        theta_sensor = angle  # Ángulo del rayo respecto al sensor
+        
+        # 2. Transformar a coordenadas globales
+        x_global = (x_t[0] + x_sensor * np.cos(x_t[2]) - y_sensor * np.sin(x_t[2]) 
+                   + range * np.cos(x_t[2] + theta_sensor))
+        y_global = (x_t[1] + y_sensor * np.cos(x_t[2]) + x_sensor * np.sin(x_t[2]) 
+                   + range * np.sin(x_t[2] + theta_sensor))
+        
+        # 3. Buscar obstáculo más cercano
+        dist, _ = obstacles_kdtree.query([x_global, y_global])
+        dist *= m['resolution']  # Convertir a metros
+        
+        # 4. Calcular probabilidad
+        prob_hit = np.exp(-(dist**2)/(2*params['sigma_hit']**2))
+        prob_random = 1.0/z_t['range_max']
+        
+        q *= (params['z_hit'] * prob_hit + params['z_random'] * prob_random)
+    
+    return q
