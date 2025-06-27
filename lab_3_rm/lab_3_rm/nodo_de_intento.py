@@ -8,10 +8,15 @@ from scipy import spatial
 import cv2
 import matplotlib.pyplot as plt
 from scipy.ndimage import gaussian_filter
+from geometry_msgs.msg import Pose
+from tf_transformations import euler_from_quaternion
+
+
+
 
 def procesar_imagen():
     # Cargar el mapa como imagen en escala de grises
-    map_img = cv2.imread('/home/paulo/zuniversidad/5to_semestre/robotica_movil/ros2_ws/src/lab_3_rm/imagenes/mapa.pgm', cv2.IMREAD_GRAYSCALE)
+    map_img = cv2.imread('/home/paulo/universidad/5to_semestre/robotica_movil/ros2_ws/src/lab_3_rm/imagenes/mapa.pgm', cv2.IMREAD_GRAYSCALE)
 
     ocupados = np.where(map_img == 0)
     lista_puntos_ocupados = list(zip(ocupados[0], ocupados[1]))
@@ -19,6 +24,9 @@ def procesar_imagen():
     resolution = 0.01
     origin = [0.0, 0.0]
     height = map_img.shape[0]
+
+
+    
 
     # Convertir la lista de puntos ocupados a coordenadas en el mapa (origen abajo-izquierda)
     coordenadas_ocupadas = [
@@ -74,6 +82,8 @@ def likelihood_field_range_finder_model(z_t, theta_z_t, x_t, theta_robot, tree, 
 
 
 
+
+
 class NodoIntento(Node):
     def __init__(self):
         super().__init__('nodo_intento')
@@ -83,6 +93,13 @@ class NodoIntento(Node):
             self.listener_callback,
             1
         )
+
+        self.pos_real = self.pose_real = self.create_subscription(
+            Pose, '/real_pose', self.registrar_angulo, 10)
+
+
+        self.angulo = 0
+
         self.i = 0
         self.bridge = CvBridge()
         self.get_logger().info("NodoIntento iniciado")
@@ -92,7 +109,7 @@ class NodoIntento(Node):
 
         # --- Cargar imagen de fondo y preparar figura ---
         self.mapa_img = cv2.imread(
-            '/home/paulo/zuniversidad/5to_semestre/robotica_movil/ros2_ws/src/lab_3_rm/imagenes/mapa.pgm',
+            '/home/paulo/universidad/5to_semestre/robotica_movil/ros2_ws/src/lab_3_rm/imagenes/mapa.pgm',
             cv2.IMREAD_GRAYSCALE
         )
         self.resolution = 0.01  # Debe coincidir con procesar_imagen
@@ -125,6 +142,9 @@ class NodoIntento(Node):
         plt.ion()
         plt.show()
 
+
+
+
     def listener_callback(self, msg):
         print("Recibiendo mensaje en NodoIntento")
         # OPTIMIZACIÓN: Precalcula los puntos del grid solo una vez por callback
@@ -142,7 +162,7 @@ class NodoIntento(Node):
             i = idx // self.grid_size
             k = idx % self.grid_size
             verosimilitud = likelihood_field_range_finder_model(
-                msg.ranges, theta_z_t, punto, 0, self.tree, step=5
+                msg.ranges, theta_z_t, punto, self.angulo, self.tree, step=5
             )
             verosimilitudes[k, i] = verosimilitud  # Reflexión respecto a x=y
         # Actualizar el mapa de calor
@@ -155,6 +175,12 @@ class NodoIntento(Node):
 
 
 
+
+    def registrar_angulo(self, msg):
+        q = [msg.orientation.x, msg.orientation.y, msg.orientation.z, msg.orientation.w]
+        _, _, yaw = euler_from_quaternion(q)
+        self.angulo = yaw
+        print(self.angulo)
 
 
 

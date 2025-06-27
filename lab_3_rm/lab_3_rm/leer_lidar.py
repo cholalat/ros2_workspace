@@ -46,8 +46,8 @@ class leer_lidar(Node):
         filtered_msg.angle_increment = msg.angle_increment
         filtered_msg.time_increment = msg.time_increment
         filtered_msg.scan_time = msg.scan_time
-        filtered_msg.range_min = msg.min
-        filtered_msg.range_max = msg.max
+        filtered_msg.range_min = msg.range_min
+        filtered_msg.range_max = msg.range_max
         filtered_msg.ranges = ranges.tolist()
         filtered_msg.intensities = msg.intensities
 
