@@ -1,6 +1,6 @@
 from setuptools import find_packages, setup
 
-package_name = 'lab_3_rm'
+package_name = 'proyecto_grupo_8_2025'
 
 setup(
     name=package_name,
@@ -10,8 +10,6 @@ setup(
         ('share/ament_index/resource_index/packages',
             ['resource/' + package_name]),
         ('share/' + package_name, ['package.xml']),
-        ('share/lab_3_rm/launch', ['launch/mapa_del_ambiente.xml']),
-
     ],
     install_requires=['setuptools'],
     zip_safe=True,
@@ -22,10 +20,6 @@ setup(
     tests_require=['pytest'],
     entry_points={
         'console_scripts': [
-            'procesar_mapa = lab_3_rm.procesar_mapa:main',
-            'leer_lidar = lab_3_rm.leer_lidar:main',
-            "nodo_de_intento = lab_3_rm.nodo_de_intento:main",
-
         ],
     },
 )

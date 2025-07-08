@@ -21,21 +21,15 @@
 
     <node pkg="lab_3_rm" exec="leer_lidar" name="leer_lidar" output="screen"/>
 
+    <node pkg="lab_3_rm" exec="nodo_de_intento" name="nodo_de_intento" output="screen"/>
+
+
+
+
 
 <!-- Transforms between reference frames -->
     <node pkg="tf2_ros" exec="static_transform_publisher" name="world_map_to_odom" args="--x 0.5 --y 0.5 --z 0.0 --roll 0.0 --pitch 0.0 --yaw 0.0 --frame-id world_map --child-frame-id odom"/>
 
-
-    <!-- Receives input from keyboard -->
-    <node pkg="teleop_twist_keyboard" exec="teleop_twist_keyboard" name="teleop_twist_keyboard" output="screen"/>
-
-
-
-    <node pkg="ayudantia_rviz" exec="particles_manager.py" name="particples_manager"/>
-
-    
-
-    <node pkg="rviz2" exec="rviz2" name="rviz2" output="screen" args="-d /home/paulo/zuniversidad/5to_semestre/robotica_movil/ros2_ws/src/lab_3_rm/imagenes/rviz_configurado.rviz"/>
 
 
 
