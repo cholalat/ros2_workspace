@@ -10,6 +10,11 @@ setup(
         ('share/ament_index/resource_index/packages',
             ['resource/' + package_name]),
         ('share/' + package_name, ['package.xml']),
+        ('share/proyecto_grupo_8_2025/launch', ['launch/actividad_1.xml']),
+        ('share/proyecto_grupo_8_2025/launch', ['launch/actividad_2.xml']),
+        ('share/proyecto_grupo_8_2025/launch', ['launch/actividad_3.xml']),
+
+
     ],
     install_requires=['setuptools'],
     zip_safe=True,
