@@ -18,9 +18,9 @@
 x --y y --z z --roll roll --pitch pitch --yaw yaw --frame-id base_link --child-frame-
 id laser" />
 
+<node pkg="rviz2" exec="rviz2" name="rviz" output="screen" args="-d /home/paulo/universidad/5to_semestre/robotica_movil/ros2_ws/src/proyecto_grupo_8_2025/archivos_auxiliares/config_act1.rviz"/>
 
 
-<node pkg="rviz2" exec="rviz2" name="rviz" output="screen" />
 
 
 

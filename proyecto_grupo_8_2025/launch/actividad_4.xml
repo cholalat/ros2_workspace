@@ -21,7 +21,7 @@ id laser"/>
 
 
 
-<node pkg="rviz2" exec="rviz2" name="rviz" output="screen" args="-d /home/paulo/universidad/5to_semestre/robotica_movil/ros2_ws/src/proyecto_grupo_8_2025/archivos_auxiliares/config_act3.rviz"/>
+<node pkg="rviz2" exec="rviz2" name="rviz" output="screen" args="-d /home/paulo/universidad/5to_semestre/robotica_movil/ros2_ws/src/proyecto_grupo_8_2025/archivos_auxiliares/config_act4.rviz"/>
 
 
 <node pkg="nav2_amcl" exec="amcl" name="amcl">
@@ -34,5 +34,12 @@ id laser"/>
     <param name="laser_max_beams" value="181"/>
     <param name="min_particles" value="250"/>
 </node>
+
+
+<include file="$(find-pkg-share nav2_bringup)/launch/navigation_launch.py" >
+<arg name="params_file" value="/home/paulo/universidad/5to_semestre/robotica_movil/ros2_ws/src/proyecto_grupo_8_2025/archivos_auxiliares/nav2_params.yaml" />
+</include>
+
+
 
 </launch>

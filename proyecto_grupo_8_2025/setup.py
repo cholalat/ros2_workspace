@@ -13,6 +13,7 @@ setup(
         ('share/proyecto_grupo_8_2025/launch', ['launch/actividad_1.xml']),
         ('share/proyecto_grupo_8_2025/launch', ['launch/actividad_2.xml']),
         ('share/proyecto_grupo_8_2025/launch', ['launch/actividad_3.xml']),
+        ('share/proyecto_grupo_8_2025/launch', ['launch/actividad_4.xml']),
 
 
     ],

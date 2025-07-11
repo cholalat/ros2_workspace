@@ -21,7 +21,7 @@ id laser" />
 
 
 
-<node pkg="rviz2" exec="rviz2" name="rviz" output="screen" />
+<node pkg="rviz2" exec="rviz2" name="rviz" output="screen" args="-d /home/paulo/universidad/5to_semestre/robotica_movil/ros2_ws/src/proyecto_grupo_8_2025/archivos_auxiliares/config_act2.rviz"/>
 
 
 
